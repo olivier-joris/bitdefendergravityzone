@@ -336,6 +336,33 @@ class BitdefenderGravityzoneConnector(BaseConnector):
 
         return action_result.set_status(phantom.APP_SUCCESS)
 
+    def _handle_isolate_endpoint(self, param):
+        self.save_progress(f"In action handler for: {self.get_action_identifier()}")
+        action_result = self.add_action_result(ActionResult(dict(param)))
+
+        payload = {
+            "params": {"endpointId": param["endpoint_id"]},
+            "jsonrpc": "2.0",
+            "method": "createIsolateEndpointTask",
+            "id": str(uuid.uuid1()),
+        }
+
+        # make rest call
+        ret_val, response = self._make_rest_call(INCIDENTS_ENDPOINT, action_result, method="post", data=json.dumps(payload))
+
+        if phantom.is_fail(ret_val):
+            self.save_progress(f"Error {action_result.get_message()}")
+            return action_result.get_status()
+
+        self.save_progress(BDGZ_OK)
+
+        action_result.add_data(response)
+
+        if not self._validate_task_response(response):
+            return action_result.set_status(phantom.APP_ERROR, f"{BDGZ_ERR}")
+
+        return action_result.set_status(phantom.APP_SUCCESS)
+
     def handle_action(self, param):
         ret_val = phantom.APP_SUCCESS
 
@@ -358,6 +385,9 @@ class BitdefenderGravityzoneConnector(BaseConnector):
 
         elif action_id == "list_quarantine":
             ret_val = self._handle_list_quarantine(param)
+
+        elif action_id == "isolate_endpoint":
+            ret_val = self._handle_isolate_endpoint(param)
 
         return ret_val
 
