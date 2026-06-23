@@ -1,1 +1,4 @@
 **Unreleased**
+
+* Add new **isolate endpoint** action to isolate an endpoint from the network via the Bitdefender GravityZone Incidents API
+* Add support for Python 3.13

@@ -1,7 +1,7 @@
 # Bitdefender GravityZone
 
 Publisher: Splunk Community <br>
-Connector Version: 1.0.2 <br>
+Connector Version: 1.1.0 <br>
 Product Vendor: Bitdefender <br>
 Product Name: GravityZone <br>
 Minimum Product Version: 5.1.0
@@ -24,7 +24,8 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 [delete quarantine](#action-delete-quarantine) - Delete items from quarantine <br>
 [unquarantine computer](#action-unquarantine-computer) - Unquarantine Computers and Virtual Machines <br>
 [unquarantine exchange](#action-unquarantine-exchange) - Unquarantine items for Exchange Servers <br>
-[list quarantine](#action-list-quarantine) - Get list of available quarantined items related to a company
+[list quarantine](#action-list-quarantine) - Get list of available quarantined items related to a company <br>
+[isolate endpoint](#action-isolate-endpoint) - Isolate an endpoint from the network via Bitdefender GravityZone
 
 ## action: 'test connectivity'
 
@@ -174,6 +175,31 @@ action_result.data.\*.canBeRemoved | boolean | | |
 action_result.data.\*.threatName | string | | |
 action_result.data.\*.companyId | string | | |
 action_result.summary.num_items | numeric | | |
+summary.total_objects | numeric | | |
+summary.total_objects_successful | numeric | | |
+
+## action: 'isolate endpoint'
+
+Isolate an endpoint from the network via Bitdefender GravityZone
+
+Type: **contain** <br>
+Read only: **False**
+
+#### Action Parameters
+
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
+--------- | -------- | ----------- | ---- | --------
+**endpoint_id** | required | ID of the endpoint to isolate | string | `bitdefender endpoint id` |
+
+#### Action Output
+
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.parameter.endpoint_id | string | `bitdefender endpoint id` | |
+action_result.status | string | | success failed |
+action_result.message | string | | |
+action_result.data.\*.result | boolean | | |
+action_result.summary | numeric | | |
 summary.total_objects | numeric | | |
 summary.total_objects_successful | numeric | | |
 

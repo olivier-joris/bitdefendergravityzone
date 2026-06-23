@@ -16,6 +16,7 @@
 
 # Endpoints
 QUARANTINE_ENDPOINT = "v1.0/jsonrpc/quarantine/{service}"
+INCIDENTS_ENDPOINT = "v1.0/jsonrpc/incidents"
 
 # Messages
 BDGZ_OK = "Connected successfully to endpoint. Checking returned reply"
