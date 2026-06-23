@@ -1,9 +1,9 @@
 # Bitdefender GravityZone
 
-Publisher: Splunk Community \
-Connector Version: 1.0.2 \
-Product Vendor: Bitdefender \
-Product Name: GravityZone \
+Publisher: Splunk Community <br>
+Connector Version: 1.1.0 <br>
+Product Vendor: Bitdefender <br>
+Product Name: GravityZone <br>
 Minimum Product Version: 5.1.0
 
 This app integrates with Bitdefender GravityZone to execute various containment, corrective and investigative actions
@@ -20,17 +20,18 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration \
-[delete quarantine](#action-delete-quarantine) - Delete items from quarantine \
-[unquarantine computer](#action-unquarantine-computer) - Unquarantine Computers and Virtual Machines \
-[unquarantine exchange](#action-unquarantine-exchange) - Unquarantine items for Exchange Servers \
-[list quarantine](#action-list-quarantine) - Get list of available quarantined items related to a company
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration <br>
+[delete quarantine](#action-delete-quarantine) - Delete items from quarantine <br>
+[unquarantine computer](#action-unquarantine-computer) - Unquarantine Computers and Virtual Machines <br>
+[unquarantine exchange](#action-unquarantine-exchange) - Unquarantine items for Exchange Servers <br>
+[list quarantine](#action-list-quarantine) - Get list of available quarantined items related to a company <br>
+[isolate endpoint](#action-isolate-endpoint) - Isolate an endpoint from the network via Bitdefender GravityZone
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity using supplied configuration
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -45,7 +46,7 @@ No Output
 
 Delete items from quarantine
 
-Type: **contain** \
+Type: **contain** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -75,7 +76,7 @@ summary.total_objects_successful | numeric | | |
 
 Unquarantine Computers and Virtual Machines
 
-Type: **correct** \
+Type: **correct** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -105,7 +106,7 @@ summary.total_objects_successful | numeric | | |
 
 Unquarantine items for Exchange Servers
 
-Type: **correct** \
+Type: **correct** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -139,7 +140,7 @@ summary.total_objects_successful | numeric | | |
 
 Get list of available quarantined items related to a company
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 Services allowed are computers for 'Computers and VMs' and exchange for 'Security for Exchange'.
@@ -177,11 +178,36 @@ action_result.summary.num_items | numeric | | |
 summary.total_objects | numeric | | |
 summary.total_objects_successful | numeric | | |
 
+## action: 'isolate endpoint'
+
+Isolate an endpoint from the network via Bitdefender GravityZone
+
+Type: **contain** <br>
+Read only: **False**
+
+#### Action Parameters
+
+PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
+--------- | -------- | ----------- | ---- | --------
+**endpoint_id** | required | ID of the endpoint to isolate | string | `bitdefender endpoint id` |
+
+#### Action Output
+
+DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
+--------- | ---- | -------- | --------------
+action_result.parameter.endpoint_id | string | `bitdefender endpoint id` | |
+action_result.status | string | | success failed |
+action_result.message | string | | |
+action_result.data.\*.result | boolean | | |
+action_result.summary | numeric | | |
+summary.total_objects | numeric | | |
+summary.total_objects_successful | numeric | | |
+
 ______________________________________________________________________
 
 Auto-generated Splunk SOAR Connector documentation.
 
-Copyright 2025 Splunk Inc.
+Copyright 2026 Splunk Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
